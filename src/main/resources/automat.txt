@@ -1,0 +1,37 @@
+-----------------------------
+Automat 1
+alphabet - 0, 1
+statements - q1, q2
+final - q2
+start - q1
+
+q1 | 0 | q1
+q1 | 1 | q2
+q2 | 0 | q1
+q2 | 0 | q2
+q2 | 1 | q1
+-----------------------------
+Automat 2
+alphabet - 0, 1
+statements - q1, q2
+final - q2
+start - q1
+
+q1 | 0 | q1
+q1 | 1 | q2
+q2 | 0 | q1
+q2 | 0 | q2
+q2 | 1 | q1
+-----------------------------
+Automat 3
+alphabet - 0, 1
+statements - q1, q2
+final - q2, q1
+start - q1
+
+q1 | 0 | q1
+q1 | 1 | q2
+q2 | 0 | q1
+q2 | 0 | q2
+q2 | 1 | q1
+-----------------------------
