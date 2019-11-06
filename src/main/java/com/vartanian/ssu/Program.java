@@ -27,19 +27,7 @@ public class Program {
         {
             text += s;
         }
-//        while (i < str.Length)
-//        {
-//            var tmp = MaxStr(a, str, i);
-//            if (tmp.Key)
-//            {
-//                Console.WriteLine("token: {0} result: {1}", tmp, str.Substring(i, tmp.Value));
-//                i += tmp.Value;
-//            }
-//            else
-//            {
-//                i++;
-//            }
-//        }
+
         first.maxString(first, 0, text);
     }
 }
