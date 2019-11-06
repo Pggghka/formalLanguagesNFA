@@ -11,38 +11,36 @@ public class Program {
         //Reading the whole
         List <String> textAutomats = new ArrayList<>();
         File file = new File();
-        file.readFromFile(textAutomats, "automat.txt", false);
+        file.readFromFile(textAutomats, "automat.txt");
 
-        //Creating one autoomat from file
+        //Creating one automat from file
         NFA first = new NFA();
         first = first.createAutomat(textAutomats, "3");
         System.out.println(first);
 
-        //Reading all automats form file
-        ArrayList <NFA> automats = new ArrayList<>();
-        int index = 0;
-        for (int i=0;i < textAutomats.size(); i++){
-            if(textAutomats.get(i).contains("Automat")) {
-                automats.add(first.createAutomat(textAutomats,textAutomats.get(i).split(" ")[1]));
-            }
-        }
 
-        String acceptedWords = "";
-
-        //Checking the word
-        String word = "10";
-        first.automatContains(first, word);
-
-        //Checking words
-        ArrayList <String> words = new ArrayList<>();
+        ArrayList <String> TeaxtArr = new ArrayList<>();
         File textTXT = new File();
-        words = textTXT.readFromFile(words, "text.txt",true);
-        for(String Word: words){
-            acceptedWords += first.automatContains(first, Word);
+        textTXT.readFromFile(TeaxtArr, "text.txt");
+        String text = "";
+        for (String s : TeaxtArr)
+        {
+            text += s;
         }
-
-        first.maxString(acceptedWords);
-
+//        while (i < str.Length)
+//        {
+//            var tmp = MaxStr(a, str, i);
+//            if (tmp.Key)
+//            {
+//                Console.WriteLine("token: {0} result: {1}", tmp, str.Substring(i, tmp.Value));
+//                i += tmp.Value;
+//            }
+//            else
+//            {
+//                i++;
+//            }
+//        }
+        first.maxString(first, 0, text);
     }
 }
 

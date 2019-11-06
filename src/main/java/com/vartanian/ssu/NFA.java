@@ -1,8 +1,7 @@
 package com.vartanian.ssu;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
+import java.util.*;
 
 public class NFA {
     ArrayList<String> entryAlphabet = new ArrayList<>();
@@ -102,47 +101,58 @@ public class NFA {
                 createArr(text.get(start++), "statements - ", ","),
                 createArr(text.get(start++), "final - ", ","),
                 text.get(start++).replace("start - ", ""),
-                createTransfuncnions(text, start+2)
+                createTransfuncnions(text, start+1)
         );
         return nfa;
     }
 
-    public static String automatContains (NFA nfa, String word){
+    public static Map<Boolean, Integer> maxStringFunc (NFA nfa, String text, int position){
         ArrayList <String> Way = new ArrayList<>();
+        Map <Boolean, Integer> token = new HashMap <Boolean, Integer>();
         Way.add(nfa.start);
+        Boolean isFinal = false;
         String curSymbProc = "";
-
-        for(int i = 0; i< word.length(); i++) {
+        boolean Access = true;
+        for(; position < text.length(); position++) {
             curSymbProc = "";
             for (int j = 0; j < nfa.transitionFunction.size(); j++) {
-                if (nfa.transitionFunction.get(j).get(1).contains(word.charAt(i)+"")
+                if (nfa.transitionFunction.get(j).get(1).contains(text.charAt(position)+"")
                         && Way.get(Way.size()-1).contains(nfa.transitionFunction.get(j).get(0))) {
                     curSymbProc+= nfa.transitionFunction.get(j).get(2);
                 }
             }
+            if (curSymbProc.length()==0) break;
             Way.add(curSymbProc);
         }
-
-        System.out.print("Word " + word + " : " + Way);
-        for ( String finalstate:nfa.finalStates) {
-            if(Way.get(Way.size()-1).contains(finalstate)){
-                System.out.println(" !!!Word accessed!!!");
-                return word + " ";
+        for ( String finalState:nfa.finalStates) {
+            if(Way.get(Way.size()-1).contains(finalState) && Way.size()!=1){
+                isFinal = true;
+                break;
             }
         }
-        System.out.println();
-        return "";
+        token.put(isFinal, Way.size()-1);
+        return token;
     }
 
-    public static void maxString (String acceptedWords){
-        String[] words = acceptedWords.split(" ");
-        int max = -1; String maxLengthWord = "";
-        for(String word : words){
-            if(word.length()>max){
-                max = word.length();
-                maxLengthWord = word;
+    public  void maxString(NFA nfa, int position, String text){
+        while (position < text.length())
+        {
+            Map <Boolean,Integer> tmp =  maxStringFunc(nfa, text, position);
+            if (tmp.containsKey(true))
+            {
+                for (Map.Entry<Boolean,Integer> entry : tmp.entrySet()) {
+                    boolean key = entry.getKey();
+                    int value = entry.getValue();
+                    System.out.println("token: " + key + ", result: " + text.substring(position, value));
+                    position += value;
+                }
+            }
+            else
+            {
+                position++;
             }
         }
-        System.out.println("maxString is - " + maxLengthWord + "(length -" + max + ")");
     }
+
+
 }
