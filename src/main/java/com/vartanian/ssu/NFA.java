@@ -143,7 +143,7 @@ public class NFA {
                 for (Map.Entry<Boolean,Integer> entry : tmp.entrySet()) {
                     boolean key = entry.getKey();
                     int value = entry.getValue();
-                    System.out.println("token: " + key + ", result: " + text.substring(position, position + value));
+                    System.out.println("token: " + key + ", result: " + text.substring(position, position + value) + " length: " + text.substring(position, position + value).length());
                     position += value;
                 }
             }
