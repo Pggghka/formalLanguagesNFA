@@ -36,7 +36,7 @@ public class Program {
         idAutomat = idAutomat.createAutomat(textAutomats, "3");
 
         first.maxString(keyWordAutomat, 0, text);
-        // Creating two lexemes
+        // Creating two lexemesd
         Lexeme keyWords = new Lexeme(100, "keyWords", keyWordAutomat);
         Lexeme id = new Lexeme(10, "id", idAutomat);
         List <Lexeme> Lexemes = new ArrayList<>();
